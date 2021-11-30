@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+  nginx:
+    restart: on-failure
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/templates/default.conf.template
+    ports:
+      - 80:80
+    volumes_from: 
+      - php
+
+  php:
+    image: php:fpm
+    links:
+      - mariadb
+    volumes:
+      - ./public:/public
+
+  mariadb:
+    restart: on-failure
+    image: mariadb:latest
+    environment: 
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=user
+      - MYSQL_DATABASE=database
+      - MYSQL_PASSWORD=zeus
+    ports: 
+      - 3306:3306
+
+  phpmyadmin:
+    restart: on-failure
+    image: "phpmyadmin"
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    ports:
+      - "8080:80"
+    environment: 
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+      - PMA_USER=user
+      - PMA_PASSWORD=zeus
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=zeus
+      - MYSQL_HOST=mariadb
+      - MYSQL_DATABASE=database
+
