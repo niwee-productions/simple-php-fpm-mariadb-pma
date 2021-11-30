@@ -1,4 +1,4 @@
-# SIMPLE-PHP-FPM-MARIADB-PMA
+# Simple PHP, MARIADB, NGINX and PhpMyAdmin Docker infrastructure
 
 Use this to run a simple php project with a mariadb database & phpmyadmin
 
