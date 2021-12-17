@@ -15,7 +15,7 @@ services:
     links:
       - mariadb
     volumes:
-      - ./public:/public
+      - ./app:/public
 
   mariadb:
     restart: on-failure
