@@ -13,7 +13,10 @@ git clone https://github.com/boyer-nicolas/simple-php-fpm-mariadb-pma.git my-pro
 2. Go in the cloned directory
 ```bash
 cd my-project
+mkdir app
+touch app/index.php
 ```
+> :warning: **It is strongly advised to init a git repository with the app folder.**
 
 3. Start the project
 ```bash
