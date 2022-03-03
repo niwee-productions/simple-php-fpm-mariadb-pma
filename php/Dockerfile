@@ -34,7 +34,9 @@ RUN set -xe && apk add --no-cache --update \
 	imagemagick-dev \
 	ssmtp \
 	gmp-dev \
-	imagemagick6-libs 	
+	imagemagick6-libs 	 \
+	sudo \
+	busybox-suid
 
 RUN docker-php-ext-install opcache mysqli pdo pdo_mysql zip gd bcmath
 
@@ -83,4 +85,24 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 WORKDIR /var/www/html
 
+
+ENV USER=stagiaire
+ENV UID=1000
+ENV GID=1000
+
+ADD ./docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ARG USER=stagiaire
+ENV HOME /home/$USER
+
+RUN adduser -D $USER \
+        && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
+        && chmod 0440 /etc/sudoers.d/$USER
+
+RUN adduser $USER www-data
+
+USER $USER
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD [ "php-fpm" ]

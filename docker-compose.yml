@@ -12,6 +12,7 @@ services:
 
   php:
     build: php/
+    user: stagiaire
     links:
       - mariadb
     volumes:
