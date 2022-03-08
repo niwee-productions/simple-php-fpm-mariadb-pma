@@ -17,15 +17,14 @@ services:
       - mariadb
     volumes:
       - ./app:/public
+    env_file:
+      - .env
 
   mariadb:
     restart: on-failure
     image: mariadb:latest
-    environment: 
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_USER=user
-      - MYSQL_DATABASE=database
-      - MYSQL_PASSWORD=zeus
+    env_file:
+      - .env
     ports: 
       - 3306:3306
 
@@ -38,13 +37,5 @@ services:
       - mariadb
     ports:
       - "8080:80"
-    environment: 
-      - PMA_ARBITRARY=1
-      - PMA_HOST=mariadb
-      - PMA_USER=user
-      - PMA_PASSWORD=zeus
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=zeus
-      - MYSQL_HOST=mariadb
-      - MYSQL_DATABASE=database
-
+    env_file:
+      - .env
