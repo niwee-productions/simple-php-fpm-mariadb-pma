@@ -7,7 +7,7 @@ Use this to run a simple php project with a mariadb database & phpmyadmin
 
 1. Clone the project
 ```bash
-git clone https://github.com/boyer-nicolas/simple-php-fpm-mariadb-pma.git my-project
+git clone https://github.com/niwee-productions/simple-php-fpm-mariadb-pma.git my-project
 ```
 
 2. Go in the cloned directory
