@@ -88,6 +88,7 @@ WORKDIR /var/www/html
 
 ENV USER=stagiaire
 ENV UID=1000
+ENV USER_ID=1000
 ENV GID=1000
 
 ADD ./docker-entrypoint.sh /usr/local/bin/
